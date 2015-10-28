@@ -7,7 +7,7 @@ Look up the details for a given address.
 
 `npm install --save address-details`
 
-```JavaScript
+```javascript
 var AddressDetails = require('address-details');
 
 
