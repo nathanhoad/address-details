@@ -26,9 +26,10 @@ var AddressDetails = {
             
             var address = {
                 fullAddress: result.formatted_address,
-                street: components.street_number.short_name + ' ' + components.route.short_name,
+                street: components.street_number ? components.street_number.short_name + ' ' + components.route.short_name : null,
+                suburb: components.locality.long_name,
+                postCode: components.postal_code ? components.postal_code.short_name : null,
                 state: components.administrative_area_level_1.short_name,
-                postCode: components.postal_code.short_name,
                 country: components.country.long_name,
                 latitude: result.geometry.location.lat,
                 longitude: result.geometry.location.lng
