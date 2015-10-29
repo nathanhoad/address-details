@@ -8,14 +8,14 @@ describe('Address Details', function () {
             AddressDetails.for('100 Queen St, Brisbane, Australia', function (err, details) {
                 should(err).equal(null);
                 
-                should(details).have.properties('full_address', 'street', 'state', 'post_code', 'country', 'latitude', 'longitude');
-                should(details.full_address).equal("100 Queen St, Brisbane QLD 4000, Australia");
+                should(details).have.properties('fullAddress', 'street', 'state', 'postCode', 'country', 'latitude', 'longitude');
+                should(details.fullAddress).equal("100 Queen St, Brisbane QLD 4000, Australia");
                 should(details.street).equal('100 Queen St');
                 should(details.state).equal('QLD');
-                should(details.post_code).equal('4000');
+                should(details.postCode).equal('4000');
                 should(details.country).equal('Australia');
-                should(details.latitude).equal(-27.4699397);
-                should(details.longitude).equal(153.0248197);
+                should(Math.ceil(details.latitude * 10000) / 10000).equal(-27.4699); // for any rounding issues with changing coords
+                should(Math.floor(details.longitude * 10000) / 10000).equal(153.0248); // for any rounding issues with changing coords
                 
                 done();
             });
