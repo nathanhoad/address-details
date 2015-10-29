@@ -42,6 +42,25 @@ describe('Address Details', function () {
         });
         
         
+        it('should get the details of a state without a specific address', function (done) {
+            AddressDetails.for('Queensland, Australia', function (err, details) {
+                should(err).equal(null);
+                
+                should(details).have.properties('fullAddress', 'street', 'state', 'postCode', 'country', 'latitude', 'longitude');
+                should(details.fullAddress).equal("Queensland, Australia");
+                should(details.street).equal(null);
+                should(details.suburb).equal(null);
+                should(details.postCode).equal(null);
+                should(details.state).equal('QLD');
+                should(details.country).equal('Australia');
+                should(Math.ceil(details.latitude * 10000) / 10000).equal(-20.9175); // for any rounding issues with changing coords
+                should(Math.floor(details.longitude * 10000) / 10000).equal(142.7027); // for any rounding issues with changing coords
+                
+                done();
+            });
+        });
+        
+        
         it('should have an error on a fake address', function (done) {
             AddressDetails.for('123 Fake St, Somewhere', function (err, details) {
                 should(err).not.equal(null);
